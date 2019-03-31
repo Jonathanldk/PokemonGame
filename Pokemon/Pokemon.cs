@@ -67,7 +67,12 @@ namespace Pokemon
         /// <returns>The amount of damage that was applied so we can print it for the user</returns>
         public int Attack(Pokemon enemy)
         {
-            throw new NotImplementedException();
+            int attack;
+            attack = (this.baseAttack * this.level) * this.CalculateElementalEffects(this.baseAttack,enemy.element) - (enemy.CalculateDefence());
+            enemy.ApplyDamage(attack);
+            return attack;
+               
+            
         }
 
         /// <summary>
@@ -76,7 +81,9 @@ namespace Pokemon
         /// <returns> returns the amount of defence points considering the level as well</returns>
         public int CalculateDefence()
         {
-            throw new NotImplementedException();
+            int defense; 
+            defense= this.baseDefence * this.level;
+            return defense;
         }
 
         /// <summary>
@@ -87,7 +94,42 @@ namespace Pokemon
         /// <returns>The damage post elemental-effect</returns>
         public int CalculateElementalEffects(int damage, Elements enemyType)
         {
-            throw new NotImplementedException();
+            //Grass
+            if(this.element == Elements.Grass && enemyType == Elements.Fire)
+            {
+                damage =  1/2;
+            }
+
+            if (this.element == Elements.Grass && enemyType == Elements.Water)
+            {
+                damage = 2;
+            }
+
+
+            //Water
+            if (this.element == Elements.Water && enemyType == Elements.Grass)
+            {
+                damage = 1/2;
+            }
+
+            if (this.element == Elements.Water && enemyType == Elements.Fire)
+            {
+                damage = 2;
+            }
+
+
+            //Fire 
+            if (this.element == Elements.Fire && enemyType == Elements.Water)
+            {
+                damage = 1/2;
+            }
+
+            if (this.element == Elements.Fire && enemyType == Elements.Grass)
+            {
+                damage = 2;
+            }
+            return damage;
+
         }
 
         /// <summary>
@@ -96,7 +138,8 @@ namespace Pokemon
         /// <param name="damage"></param>
         public void ApplyDamage(int damage)
         {
-            throw new NotImplementedException();
+            hp = this.hp - damage;
+            
         }
 
         /// <summary>
