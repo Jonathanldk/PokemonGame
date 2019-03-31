@@ -67,9 +67,13 @@ namespace Pokemon
         /// <returns>The amount of damage that was applied so we can print it for the user</returns>
         public int Attack(Pokemon enemy)
         {
+            // Make a new int called attack
             int attack;
+            // Use the formular that Marco provided 
             attack = (this.baseAttack * this.level) * this.CalculateElementalEffects(this.baseAttack,enemy.element) - (enemy.CalculateDefence());
+            // Apply the damage to the enemy
             enemy.ApplyDamage(attack);
+            // Returns attack
             return attack;
                
             
@@ -81,8 +85,11 @@ namespace Pokemon
         /// <returns> returns the amount of defence points considering the level as well</returns>
         public int CalculateDefence()
         {
+            // Make a new int defense 
             int defense; 
+            // Use the formular that Marco provided 
             defense= this.baseDefence * this.level;
+            //returns defense 
             return defense;
         }
 
@@ -94,7 +101,9 @@ namespace Pokemon
         /// <returns>The damage post elemental-effect</returns>
         public int CalculateElementalEffects(int damage, Elements enemyType)
         {
-            //Grass
+            // these if statements checks the element you chose and compare it to the enemy's element and calculate the damage
+
+            //Grass element
             if(this.element == Elements.Grass && enemyType == Elements.Fire)
             {
                 damage =  1/2;
@@ -106,7 +115,7 @@ namespace Pokemon
             }
 
 
-            //Water
+            //Water element
             if (this.element == Elements.Water && enemyType == Elements.Grass)
             {
                 damage = 1/2;
@@ -118,7 +127,7 @@ namespace Pokemon
             }
 
 
-            //Fire 
+            //Fire element 
             if (this.element == Elements.Fire && enemyType == Elements.Water)
             {
                 damage = 1/2;
@@ -138,6 +147,7 @@ namespace Pokemon
         /// <param name="damage"></param>
         public void ApplyDamage(int damage)
         {
+            // it takes the hp and substract the damage 
             hp = this.hp - damage;
             
         }
