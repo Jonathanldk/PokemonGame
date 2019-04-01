@@ -70,7 +70,7 @@ namespace Pokemon
             // Make a new int called attack
             int attack;
             // Use the formular that Marco provided 
-            attack = (this.baseAttack * this.level) * this.CalculateElementalEffects(this.baseAttack,enemy.element) - (enemy.CalculateDefence());
+            attack = (this.baseAttack * this.level) * this.CalculateElementalEffects(this.baseAttack, enemy.element) - (enemy.CalculateDefence());
             // Apply the damage to the enemy
             enemy.ApplyDamage(attack);
             // Returns attack

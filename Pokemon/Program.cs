@@ -37,7 +37,7 @@ namespace Pokemon
             // Add three new Pokemons to the list 
             roster.Add(new Pokemon("Charmander", 3, 52, 43, 39, Elements.Fire, fireMoves));
             roster.Add(new Pokemon("Squirtle", 2, 48, 65, 44, Elements.Water, waterMoves));
-            roster.Add(new Pokemon("Bulbarsaur", 3, 49, 49, 45, Elements.Grass, grassMoves));
+            roster.Add(new Pokemon("Bulbasaur", 3, 49, 49, 45, Elements.Grass, grassMoves));
 
             Console.WriteLine("Welcome to the world of Pokemon!\nThe available commands are list/fight/heal/quit");
 
@@ -60,7 +60,7 @@ namespace Pokemon
                     case "fight":
                         //PRINT INSTRUCTIONS AND POSSIBLE POKEMONS (SEE SLIDES FOR EXAMPLE OF EXECUTION)
                         Console.Write("Choose who should fight:");
-                        Console.WriteLine("(Example: Bulbarsaur Squirtle)");
+                        Console.WriteLine("(Example: Bulbasaur Squirtle)");
 
                         //READ INPUT, REMEMBER IT SHOULD BE TWO POKEMON NAMES
                         // Make a string called pokemonNames
@@ -74,8 +74,10 @@ namespace Pokemon
 
                         //BE SURE TO CHECK THE POKEMON NAMES THE USER WROTE ARE VALID (IN THE ROSTER) AND IF THEY ARE IN FACT 2!
                         // Go thorugh all the Pokemon in order to chose who to fight with
+                        // By going through the foreach it already checks if Pokemon names are valid
                         foreach (Pokemon p in roster)
                         {
+                            
                             // Checks if the length of the array is shorter or longer than 3 
                             if (vs.Length == 1 || vs.Length == 3) 
                             {
@@ -84,7 +86,6 @@ namespace Pokemon
                                 goto case "fight";
                             }
 
-                         
                             // The first input in the array is your pokemon
                             if (p.Name == vs[0])
                             {
@@ -99,18 +100,36 @@ namespace Pokemon
                                 enemy = p;
                               
                             }
-
+                            
+                            
                             // If the pokemon you chose is the same as your opponent, then you go to case fight again
-                            if (player == enemy)
+                            if (vs[0] == vs[1])
                             {
-                                Console.WriteLine("You can't chose" + " " + p.Name + " " + "as your Pokemon and your opponent");
+                                Console.WriteLine("You can't chose" + " " + vs[0] + " " + "as your Pokemon and your opponent");
                                 Console.WriteLine("Try again");
                                 goto case "fight";
                             }
-
-
+                            
+                           
                         }
-
+                        /*
+                        foreach(Pokemon p in roster)
+                        {
+                            // This checks if the name that you wrote is a pokemon name
+                            if (p.Name != vs[0] || p.Name != vs[1])
+                            {
+                                Console.WriteLine("You have to chose a pokemon that exist, this is not Digimon");
+                                Console.WriteLine("Try again");
+                                goto case "fight";
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }*/
+                        
+                       
+                        
 
 
                         //if everything is fine and we have 2 pokemons let's make them fight
@@ -141,14 +160,14 @@ namespace Pokemon
                                 
 
                                 //GET USER ANSWER, BE SURE TO CHECK IF IT'S A VALID MOVE, OTHERWISE ASK AGAIN
-                                // Press the number and then make it to a int 
+                                // Press the number and then parse the string to an int
                                 string inputMove = Console.ReadLine();
-                                int pokemonMove = int.Parse(inputMove);  
+                                int pokemonMoves = int.Parse(inputMove);  
 
                                 // If the number you press is >= 0 and it is smaller than the amount of moves it prints the choosen move
-                                if (pokemonMove >= 0 && pokemonMove < player.Moves.Count)
+                                if (pokemonMoves >= 0 && pokemonMoves < player.Moves.Count)
                                 {
-                                    Console.WriteLine("You chose to use" + " " + player.Moves[pokemonMove].Name);
+                                    Console.WriteLine("You chose to use" + " " + player.Moves[pokemonMoves].Name);
                                 }
                                 else  
                                 {
@@ -166,13 +185,14 @@ namespace Pokemon
                                 damage = player.Attack(enemy);
 
                                 //print the move and damage
-                                Console.WriteLine(player.Name + " uses " + player.Moves[pokemonMove].Name + ". " + enemy.Name + " loses " + damage + " HP");
+                                Console.WriteLine(player.Name + " uses " + player.Moves[pokemonMoves].Name + ". " + enemy.Name + " loses " + damage + " HP");
 
                                 //if the enemy is not dead yet, it attacks
                                 if (enemy.Hp > 0)
                                 {
                                     //CHOOSE A RANDOM MOVE BETWEEN THE ENEMY MOVES AND USE IT TO ATTACK THE PLAYER
                                     Random rand = new Random();
+                                    //Placeholders 
                                     int enemyMove = -1;
                                     int enemyDamage = -1;
 
@@ -190,8 +210,8 @@ namespace Pokemon
                                         // it chooses randomly between 2 moves 
                                         enemyMove = rand.Next(2);
                                     }
-                                    // checks if the enemy is Bulbarsaur because then it only have two attacks 
-                                    if (enemy.Name == "Bulbarsaur")
+                                    // checks if the enemy is Bulbasaur because then it only have two attacks 
+                                    if (enemy.Name == "Bulbasaur")
                                     {
                                         // it chooses randomly between 3 moves 
                                         enemyMove = rand.Next(3);
