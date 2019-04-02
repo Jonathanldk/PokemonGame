@@ -78,7 +78,7 @@ namespace Pokemon
                         foreach (Pokemon p in roster)
                         {
                             
-                            // Checks if the length of the array is shorter or longer than 3 
+                            // Checks if the length of the array is shorter or longer than 3 to make sure that the user chooses 2 pokemons
                             if (vs.Length == 1 || vs.Length == 3) 
                             {
                                 Console.WriteLine("You chose a wrong number of pokemons, try again");
@@ -112,25 +112,7 @@ namespace Pokemon
                             
                            
                         }
-                        /*
-                        foreach(Pokemon p in roster)
-                        {
-                            // This checks if the name that you wrote is a pokemon name
-                            if (p.Name != vs[0] || p.Name != vs[1])
-                            {
-                                Console.WriteLine("You have to chose a pokemon that exist, this is not Digimon");
-                                Console.WriteLine("Try again");
-                                goto case "fight";
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }*/
-                        
                        
-                        
-
 
                         //if everything is fine and we have 2 pokemons let's make them fight
                         if (player != null && enemy != null && player != enemy)
